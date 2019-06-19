@@ -37,7 +37,7 @@ namespace LeetCode
             while (nodes.Count > 0)
             {
                 int a = nodes.Count;
-                result += ((int)nodes.Pop() * (int)Math.Pow(10, a -1));
+                result += ((int)nodes.Pop() * (int)Math.Pow(10, a - 1));
             }
 
             return result;
@@ -46,27 +46,35 @@ namespace LeetCode
         //num = 111;
         private ListNode NumConvert2ListNode(int num)
         {
-            Stack nodes = new Stack();
+            Queue queue = QueueCacheCreator(num);
+            ListNode headNode = null;
+            if (queue.Count > 0)
+            {
+                headNode = new ListNode((int)queue.Dequeue());
+            }
+            ListNode listNode = ListNodeCreator(headNode, queue);
+            return listNode;
+        }
+        private Queue QueueCacheCreator(int num)
+        {
+            Queue queue = new Queue();
+            if (num == 0)
+            {
+                queue.Enqueue(num % 10);
+            }
             while (num > 0)
             {
-                int a = 1;
-                while (num % (Math.Pow(10, a)) > 10)
-                {
-                    a++;
-                }
-                int currentNum = num / (int)(Math.Pow(10, a));
-                nodes.Push(currentNum);
-                num = num - (currentNum * (int)Math.Pow(10, a));
+                queue.Enqueue(num % 10);
+                num = num / 10;
             }
-            ListNode node = null;
-            if (nodes.Count > 0)
+            return queue;
+        }
+        private ListNode ListNodeCreator(ListNode node, Queue queue)
+        {
+            if (queue.Count > 0)
             {
-                node = new ListNode((int)nodes.Pop());
-                while (nodes.Count > 0)
-                {
-                    node.val = (int)nodes.Pop();
-                    node = node.next;
-                }
+                node.next = new ListNode((int)queue.Dequeue());
+                ListNodeCreator(node.next, queue);
             }
             return node;
         }
