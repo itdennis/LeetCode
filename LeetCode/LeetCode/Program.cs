@@ -31,8 +31,26 @@ namespace LeetCode
 
         private static void TestCase3()
         {
-            Solution_7_ReverseInt solution_7_ReverseInt = new Solution_7_ReverseInt();
-            solution_7_ReverseInt.Reverse(100);
+            try
+            {
+                while (true)
+                {
+                    Console.WriteLine("plz input:");
+                    var input = Console.ReadLine();
+                    if (input.Equals("break"))
+                    {
+                        break;
+                    }
+                    Solution_7_ReverseInt solution_7_ReverseInt = new Solution_7_ReverseInt();
+                    int inputNum = int.Parse(input);
+                    Console.WriteLine("result is:");
+                    Console.WriteLine(solution_7_ReverseInt.Reverse(inputNum)); 
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
