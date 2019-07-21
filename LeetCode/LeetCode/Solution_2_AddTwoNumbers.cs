@@ -5,12 +5,7 @@ using System.Text;
 
 namespace LeetCode
 {
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-        public ListNode(int x) { val = x; }
-    }
+    
     public class Solution_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
@@ -25,9 +20,9 @@ namespace LeetCode
             var output = l1Result + l2Result;
             return NumConvert2ListNode(output);
         }
-        private int ListNodeConvert2Num(ListNode node)
+        private long ListNodeConvert2Num(ListNode node)
         {
-            int result = 0;
+            long result = 0;
             Stack nodes = new Stack();
             while (node != null)
             {
@@ -37,25 +32,26 @@ namespace LeetCode
             while (nodes.Count > 0)
             {
                 int a = nodes.Count;
-                result += ((int)nodes.Pop() * (int)Math.Pow(10, a - 1));
+                result += ((int)nodes.Pop() * (long)Math.Pow(10, a - 1));
             }
 
             return result;
         }
 
         //num = 111;
-        private ListNode NumConvert2ListNode(int num)
+        private ListNode NumConvert2ListNode(long num)
         {
             Queue queue = QueueCacheCreator(num);
             ListNode headNode = null;
             if (queue.Count > 0)
             {
-                headNode = new ListNode((int)queue.Dequeue());
+                var tempValue = queue.Dequeue();
+                headNode = new ListNode(Convert.ToInt32(tempValue));
             }
             ListNode listNode = ListNodeCreator(headNode, queue);
             return listNode;
         }
-        private Queue QueueCacheCreator(int num)
+        private Queue QueueCacheCreator(long num)
         {
             Queue queue = new Queue();
             if (num == 0)
@@ -73,7 +69,7 @@ namespace LeetCode
         {
             if (queue.Count > 0)
             {
-                node.next = new ListNode((int)queue.Dequeue());
+                node.next = new ListNode(Convert.ToInt32(queue.Dequeue()));
                 ListNodeCreator(node.next, queue);
             }
             return node;
