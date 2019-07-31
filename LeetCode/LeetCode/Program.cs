@@ -6,7 +6,7 @@ namespace LeetCode
     {
         static void Main(string[] args)
         {
-            TestCase2();
+            TestCase3();
         }
         /// <summary>
         /// not pass
