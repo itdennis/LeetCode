@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeetCode_Practice.Codes;
+using System;
 
 namespace LeetCode_Practice
 {
@@ -17,6 +18,11 @@ namespace LeetCode_Practice
             //Console.WriteLine(await Lc704.Run(new int[] { -1, 0, 3, 5, 9, 12 }, 2));
             //Console.WriteLine(await Lc69.Run(2147395599));
             //Console.WriteLine(await Lc53.Run(new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }));
+
+            LeetCode runner = new Lc67();
+            runner.Run();
+
+
             Console.ReadKey();
         }
     }
