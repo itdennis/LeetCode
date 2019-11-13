@@ -9,8 +9,8 @@ namespace LeetCode_Practice.Codes
     {
         public override void Run()
         {
-            String a = "1010";
-            String b = "1011";
+            String a = "11";
+            String b = "1";
             AddBinary(a, b);
         }
 
@@ -19,7 +19,7 @@ namespace LeetCode_Practice.Codes
             int aLen = a.Length;
             int bLen = b.Length;
             int maxLen = Math.Max(aLen, bLen);
-
+             
             var reversedA = new string(a.ToString().Reverse().ToArray());
             var reversedB = new string(b.ToString().Reverse().ToArray());
 
@@ -47,12 +47,22 @@ namespace LeetCode_Practice.Codes
                 num2 = sbB[i] - '0';
                 if (carry + num1 + num2 > 1)
                 {
-
+                    res.Append(num1 + num2 + carry - 2);
+                    carry = 1;
                 }
-
+                else
+                {
+                    res.Append(num1 + num2 + carry);
+                    carry = 0;
+                }
             }
 
-            return res.ToString().Reverse().ToString();
+            if (carry == 1)
+            {
+                res.Append(carry);
+            }
+            var reversedRes = new string(res.ToString().Reverse().ToArray());
+            return reversedRes;
 
         }
     }
