@@ -7,7 +7,7 @@ namespace LeetCode_Practice
     {
         static void Main(string[] args)
         {
-            LeetCode runner = new Lc67();
+            LeetCode runner = new Lc88();
             runner.Run();
 
 
