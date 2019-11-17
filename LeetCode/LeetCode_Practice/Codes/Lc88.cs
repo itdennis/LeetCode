@@ -9,35 +9,52 @@ namespace LeetCode_Practice.Codes
     {
         public override void Run()
         {
-            Merge(new int[] { 1,2,3,0,0,0}, 3, new int[] { 2,5,6 }, 3);
+            Merge(new int[] {2,0}, 1, new int[] { 1 },1);
         }
 
         public void Merge(int[] nums1, int m, int[] nums2, int n)
         {
-            while (n > 0)
+            if (nums2.Length == 0)
             {
-                int j = 0;
-                for (int i = 0; i < nums2.Length; i++)
+                return;
+            }
+
+            int[] temp = new int[m];
+
+            for (int i = 0; i < m; i++)
+            {
+                temp[i] = nums1[i];
+            }
+
+            int indexOfTemp= 0, indexOfNum2 = 0;
+            for (int i = 0; i < m+n; i++)
+            {
+                if (indexOfTemp >= m)
                 {
-                    while (nums2[i] >= nums1[j] && j < m)
-                    {
-                        j++;
-                    }
-                    if (j < m)
-                    {
-                        var temp = nums1[j];
-                        nums1[j] = nums2[i];
-                        nums2[i] = temp;
-                        j++;
-                    }
-                    else
-                    {
-                        nums1[j] = nums2[i];
-                        j++;
-                        n--;
-                    }
-                    m++;
-                } 
+                    nums1[i] = nums2[indexOfNum2];
+                    indexOfNum2++;
+                    continue;
+                }
+                if (indexOfNum2 >= n)
+                {
+                    nums1[i] = temp[indexOfTemp];
+                    indexOfTemp++;
+                    continue;
+                }
+
+                if (temp[indexOfTemp] >= nums2[indexOfNum2])
+                {
+                    nums1[i] = nums2[indexOfNum2];
+                    indexOfNum2++;
+                    continue;
+                }
+
+                if (temp[indexOfTemp] < nums2[indexOfNum2])
+                {
+                    nums1[i] = temp[indexOfTemp];
+                    indexOfTemp++;
+                    continue;
+                }
             }
         }
     }
